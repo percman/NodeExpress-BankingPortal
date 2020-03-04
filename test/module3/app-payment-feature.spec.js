@@ -12,13 +12,17 @@ describe('Payment Feature', () => {
   before(() => {
     getStack = routeStack('/payment', 'get') || routeStack('/services/payment', 'get');
     if (typeof getStack === 'undefined') {
-      getHandleSpy = { restore: () => {} };
+      getHandleSpy = {
+        restore: () => {}
+      };
     } else {
       getHandleSpy = sinon.spy(getStack, 'handle');
     }
     postStack = routeStack('/payment', 'post') || routeStack('/services/payment', 'post');
     if (typeof postStack === 'undefined') {
-      postHandleSpy = { restore: () => {} };
+      postHandleSpy = {
+        restore: () => {}
+      };
     } else {
       postHandleOriginal = postStack.handle;
       postHandleSpy = sinon.spy(postStack, 'handle');
@@ -44,12 +48,20 @@ describe('Payment Feature', () => {
     } catch (err) {
       assert(accounts !== undefined, 'Has the `accounts` variable been created in `app.js`?');
     }
-    const postRequest = { body: { amount: 325 } };
+    const postRequest = {
+      body: {
+        amount: 325
+      }
+    };
     const postReq = mockReq(postRequest);
     const postRes = mockRes();
 
-    const { available } = accounts.credit;
-    const { balance } = accounts.credit;
+    const {
+      available
+    } = accounts.credit;
+    const {
+      balance
+    } = accounts.credit;
     postHandleSpy(postReq, postRes);
     const newAvailable = accounts.credit.available;
     const newBalance = accounts.credit.balance;
